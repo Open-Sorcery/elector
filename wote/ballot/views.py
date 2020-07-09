@@ -10,7 +10,7 @@ def delete(request):
 
 
 def create(request):
-    return render(request, "ballot/home.html")
+    return render(request, "ballot/create.html")
 
 
 def detail(request, id):
