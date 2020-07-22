@@ -9,6 +9,10 @@ class Ballot(models.Model):
     def __str__(self):
         return f"#{self.pk} {self.title}"
 
+    @property
+    def questions(self):
+        return self.question_set.all()
+
 
 class Question(models.Model):
     ballot = models.ForeignKey(Ballot, on_delete=models.CASCADE)
@@ -17,10 +21,14 @@ class Question(models.Model):
     def __str__(self):
         return f"#{self.pk} {self.question_text}"
 
+    @property
+    def options(self):
+        return self.option_set.all()
+
 
 class Option(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=250)
+    option_text = models.CharField(max_length=250)
     votes = models.IntegerField(default=0)
 
     def __str__(self):
