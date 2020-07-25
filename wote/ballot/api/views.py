@@ -10,3 +10,9 @@ def detail(request, id):
     ballot = get_object_or_404(Ballot, id=id)
     serializer = BallotSerializer(ballot, many=False)
     return Response(serializer.data)
+
+@api_view(["DELETE"])
+def delete(request, id):
+    ballot = get_object_or_404(Ballot, id=id)
+    ballot.delete()
+    return Response()
