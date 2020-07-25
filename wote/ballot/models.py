@@ -32,4 +32,13 @@ class Option(models.Model):
     votes = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"#{self.pk} {self.choice_text}"
+        return f"#{self.pk} {self.option_text}"
+
+
+class Vote(models.Model):
+    voter_id = models.CharField(max_length=250)
+    ballot = models.ForeignKey(Ballot, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.voter_id} voted in {self.ballot}"
