@@ -47,7 +47,9 @@ def vote(request):
         ballot = serializer.validated_data["ballot"]
         token = serializer.validated_data["token"]
         options = request.data.get("options")
-        if token in [vote.voter.token for vote in ballot.votes]:
+        if token not in [voter.token for voter in ballot.voters]:
+            return Response({"detail": "you are not registered for voting"}, status=403)
+        elif token in [vote.voter.token for vote in ballot.votes]:
             return Response({"detail": "you already voted"}, status=403)
         elif timezone.now() >= ballot.deadline:
             return Response({"detail": "can not vote past deadline"}, status=403)
