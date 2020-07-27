@@ -55,7 +55,7 @@ python manage.py runserver
             ]
         }
     ],
-    "voting_list": [
+    "voter_list": [
         "voter1@example.com",
         "voter2@example.com",
         "voter3@example.com"
